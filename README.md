@@ -1,6 +1,7 @@
-<h1 div align="center">Gym Buddy</h1>
+<h1 align="center">Gym Buddy</h1>
+<div align="center">
 
-    <div align ="center">Third Project for General Assembly SEI</div>
+    Third Project for General Assembly SEI
 </div>
 <h2 align="center">Description</h2>
 Gym Buddy is a social app designed to help people stay on track with their fitness goals. The app allows users to create a profile, add meal plans with descriptions and optional photos, add exercises with descriptions and optional photos, comment on each others' meals and exercises, and view other profiles.
