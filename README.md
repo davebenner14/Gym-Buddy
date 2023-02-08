@@ -10,10 +10,15 @@ Gym Buddy is a social app designed to help people stay on track with their fitne
 Add screen shots later
 
 <h2 align="center">Technologies Used</h2>
+
 - HTML
+
 - CSS
+
 - Django
+
 - Python
+
 - AWS API
 
 <h2 align="center">Getting Started</h2>
