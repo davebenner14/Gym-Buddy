@@ -20,9 +20,13 @@ Add screen shots later
 Add link to app here
 
 <h2 align="center">Team</h2>
-[David Benner](https://github.com/davebenner14)
-[Ken Lo](https://github.com/kenlo112)
-[Mohamed Abdulle](https://github.com/m7amed95)
+
+- [David Benner](https://github.com/davebenner14)
+
+- [Ken Lo](https://github.com/kenlo112)
+
+- [Mohamed Abdulle](https://github.com/m7amed95)
+
 
 Add links to Githubs here
 
