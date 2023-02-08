@@ -10,19 +10,19 @@ Gym Buddy is a social app designed to help people stay on track with their fitne
 Add screen shots later
 
 <h2 align="center">Technologies Used</h2>
-HTML
-CSS
-Django
-Python
-AWS API
+- HTML
+- CSS
+- Django
+- Python
+- AWS API
 
 <h2 align="center">Getting Started</h2>
 Add link to app here
 
 <h2 align="center">Team</h2>
-David Benner
-Ken Lo
-Mohamed Abdulle
+[David Benner](https://github.com/davebenner14)
+[Ken Lo](https://github.com/kenlo112)
+[Mohamed Abdulle](https://github.com/m7amed95)
 
 Add links to Githubs here
 
