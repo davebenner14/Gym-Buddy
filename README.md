@@ -27,9 +27,6 @@ Add link to app here
 
 - [Mohamed Abdulle](https://github.com/m7amed95)
 
-
-Add links to Githubs here
-
 <h2 align="center">Next Steps</h2>
 Add next steps here
 
