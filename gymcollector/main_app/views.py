@@ -9,7 +9,7 @@ def about(request):
   return render(request, 'about.html')
 
 def exercise_index(request):
-  exercise = Exercise.objects.all()
+  exercises = Exercise.objects.all()
   return render(request, 'exercise/index.html', {
     'exercises': exercises
   })
