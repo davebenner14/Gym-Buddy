@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Exercise
 
 # Create your views here.
 def home(request):
@@ -7,7 +8,8 @@ def home(request):
 def about(request):
   return render(request, 'about.html')
 
-def gyms_index(request):
-  return render(request, 'gyms/index.html', {
-    'gyms': gyms
+def exercise_index(request):
+  exercises = Exercise.objects.all()
+  return render(request, 'exercise/index.html', {
+    'exercises': exercises
   })
