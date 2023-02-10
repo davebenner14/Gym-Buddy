@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView
 from .models import Exercise
 
 # Create your views here.
@@ -18,3 +19,8 @@ def exercises_index(request):
 def exercises_detail(request, exercise_id):
   exercise = Exercise.objects.get(id=exercise_id)
   return render(request, 'exercises/detail.html', { 'exercise': exercise})
+
+
+class ExerciseCreate(CreateView):
+  model = Exercise
+  fields = '__all__'
