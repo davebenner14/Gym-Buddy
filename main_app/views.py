@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Exercise
+from .models import Exercise, Plan
 
 # Create your views here.
 def home(request):
@@ -18,3 +18,13 @@ def exercises_index(request):
 def exercises_detail(request, exercise_id):
   exercise = Exercise.objects.get(id=exercise_id)
   return render(request, 'exercises/detail.html', { 'exercise': exercise})
+
+def plans_index(request):
+  plans = Plan.objects.all()
+  return render(request, 'plans/index.html', {
+    'plans': plans
+  })
+
+def plans_detail(request, plan_id):
+  plan = Plan.objects.get(id=plan_id)
+  return render(request, 'plans/detail.html', { 'plan': plan })
