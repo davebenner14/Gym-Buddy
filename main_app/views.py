@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
-from .models import Exercise
+
+from .models import Exercise, Plan
 
 # Create your views here.
 def home(request):
@@ -24,3 +25,12 @@ def exercises_detail(request, exercise_id):
 class ExerciseCreate(CreateView):
   model = Exercise
   fields = '__all__'
+def plans_index(request):
+  plans = Plan.objects.all()
+  return render(request, 'plans/index.html', {
+    'plans': plans
+  })
+
+def plans_detail(request, plan_id):
+  plan = Plan.objects.get(id=plan_id)
+  return render(request, 'plans/detail.html', { 'plan': plan })

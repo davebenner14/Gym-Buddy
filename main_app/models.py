@@ -10,3 +10,10 @@ class Exercise(models.Model):
 
     def __str__(self):
         return self.TypeOfWorkout
+    
+
+class Plan(models.Model):
+    name = models.CharField(max_length=100)
+    weight = models.IntegerField()
+    description = models.TextField(max_length=250)
+
