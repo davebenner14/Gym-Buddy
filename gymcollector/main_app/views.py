@@ -8,8 +8,8 @@ def home(request):
 def about(request):
   return render(request, 'about.html')
 
-def exercise_index(request):
+def exercises_index(request):
   exercises = Exercise.objects.all()
-  return render(request, 'exercise/index.html', {
+  return render(request, 'exercises/index.html', {
     'exercises': exercises
   })
