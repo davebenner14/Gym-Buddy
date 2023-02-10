@@ -13,3 +13,8 @@ def exercises_index(request):
   return render(request, 'exercises/index.html', {
     'exercises': exercises
   })
+
+
+def exercises_detail(request, exercise_id):
+  exercise = Exercise.objects.get(id=exercise_id)
+  return render(request, 'exercises/detail.html', { 'exercise': exercise})
