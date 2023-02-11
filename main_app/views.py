@@ -57,3 +57,11 @@ class MealCreate(CreateView):
 
 class MealDetail(DetailView):
   model = Meal
+
+class MealUpdate(UpdateView):
+  model = Meal
+  fields = ['name', 'price']
+
+class MealDelete(DeleteView):
+  model = Meal
+  success_url = '/meals'

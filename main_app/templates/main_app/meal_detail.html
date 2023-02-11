@@ -13,7 +13,8 @@
             <p>Date Created: {{ meal.created_at }}</p>
       </div>
       <div class="card-action">
-
+        <a href="{% url 'meals_update' meal.id %}">Edit</a>
+        <a href="{% url 'meals_delete' meal.id %}">Delete</a>
       </div>
     </div>
   </div>
