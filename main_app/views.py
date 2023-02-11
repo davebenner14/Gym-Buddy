@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from .models import Exercise, Plan, Meal
 
 # Create your views here.
@@ -49,4 +49,7 @@ class PlanUpdate(UpdateView):
 #   success_url = '/plans'
 
 class MealList(ListView):
+  model = Meal
+
+class MealDetail(DetailView):
   model = Meal
