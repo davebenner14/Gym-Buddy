@@ -15,13 +15,14 @@ class Exercise(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('detail', kwargs={'cat_id': self.id})
+        return reverse('exercises_detail', kwargs={'pk': self.id})
     
 
 class Plan(models.Model):
     name = models.CharField(max_length=100)
     weight = models.IntegerField()
     goal = models.TextField(max_length=250)
+   
 
     def __str__(self):
         return self.name
