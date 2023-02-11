@@ -28,3 +28,11 @@ class Plan(models.Model):
     
     def get_absolute_url(self):
         return reverse('detail', kwargs={'plan_id': self.id})
+
+class Meal(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    
