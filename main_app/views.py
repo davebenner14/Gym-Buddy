@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Exercise, Plan
 
@@ -34,3 +34,16 @@ def plans_index(request):
 def plans_detail(request, plan_id):
   plan = Plan.objects.get(id=plan_id)
   return render(request, 'plans/detail.html', { 'plan': plan })
+
+class PlanCreate(CreateView):
+  model = Plan
+  fields = '__all__'
+  success_url = '/plans/{plan_id}'
+
+class PlanUpdate(UpdateView):
+  model = Plan
+  fields = ['name', 'weight', 'goal']
+
+class PlantDelete(DeleteView):
+  model = Plan
+  success_url = '/plans'
