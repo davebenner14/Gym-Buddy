@@ -51,5 +51,6 @@ class PlanUpdate(UpdateView):
 class MealList(ListView):
   model = Meal
 
-class MealDetail(DetailView):
+class MealCreate(CreateView):
   model = Meal
+  fields = '__all__'
