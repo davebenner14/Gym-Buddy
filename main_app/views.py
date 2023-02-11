@@ -55,3 +55,5 @@ class MealCreate(CreateView):
   model = Meal
   fields = '__all__'
 
+class MealDetail(DetailView):
+  model = Meal
