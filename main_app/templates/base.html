@@ -27,11 +27,13 @@
             </li>
           </ul>
           <ul class="right">
-            <li><a href="/about">About</a></li>
+            <li><a href="{% url 'about'  %}">About</a></li>
+            <li><a href="{% url 'exercises_create' %}">Add a Exercise</a></li>
+           
             <li><a href="{% url 'plans_create' %}"></a>>Add Health Plans</a></li>
             <li><a href="{% url 'index' %}">View All Health Plans</a></li>
-            <li><a href="/exercise">Add Exercise</a></li>
-            <li><a href="{% url 'index'  %}">View All My Exercises</a></li>
+            
+            <li><a href="{% url 'exercise_index'  %}">View All My Exercises</a></li>
             <li><a >Add Meal</a></li>
             <li><a >View All Meals</a></li>
             <li><a >Log in/Log out</a></li>
