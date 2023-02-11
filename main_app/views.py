@@ -44,6 +44,6 @@ class PlanUpdate(UpdateView):
   model = Plan
   fields = ['name', 'weight', 'goal']
 
-class PlantDelete(DeleteView):
-  model = Plan
-  success_url = '/plans'
+# class PlantDelete(DeleteView):
+#   model = Plan
+#   success_url = '/plans'
