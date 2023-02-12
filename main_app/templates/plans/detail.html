@@ -12,6 +12,7 @@
         {% else %}
         <p>No weight given</p>
         {% endif %}
+        <p>Plan Goal: {{ plan.goal }}</p>
       </div>
       <div class="card-action">
         <a href="{% url 'plans_update' plan.id %}">Edit</a>
@@ -21,3 +22,4 @@
     </div>
   </div>
 </div>
+{% endblock %}
