@@ -3,11 +3,13 @@
 <h1>Health Plans</h1>
 
 {% for plan in plans %}
-<div class="card">
-  <div class="card-content">
-    <span class="card-title">{{ plan.name }}</span>
-    <p>Current Weight (Optional): {{ plan.weight }}</p>
-    <p>Plan Goal: {{ plan.goal }}</p>
+<a href="{% url 'detail' plan.id %}">
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">{{ plan.name }}</span>
+      <p>Current Weight (Optional): {{ plan.weight }}</p>
+      <p>Plan Goal: {{ plan.goal }}</p>
+    </div>
   </div>
-</div>
-{% endfor %} {% endblock %}
+  {% endfor %} {% endblock %}
+</a>

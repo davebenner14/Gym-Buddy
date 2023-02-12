@@ -58,8 +58,10 @@ def plans_detail(request, plan_id):
 
 class PlanCreate(CreateView):
   model = Plan
-  fields = '__all__'
-  success_url = '/plans/{plan_id}'
+  fields = ['name', 'weight', 'goal']
+
+  # fields = '__all__'
+  # success_url = '/plans/{plan_id}'
 
 class PlanUpdate(UpdateView):
   model = Plan
