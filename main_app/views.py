@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -54,7 +54,14 @@ def plans_index(request):
 
 def plans_detail(request, plan_id):
   plan = Plan.objects.get(id=plan_id)
-  return render(request, 'plans/detail.html', { 'plan': plan })
+  id_list = plan.exercises.all().values_list('id')
+  exercises_plan_doesnt_have = Exercise.objects.exclude(id__in=id_list)
+  return render(request, 'plans/detail.html', { 'plan': plan, 'exercises': exercises_plan_doesnt_have })
+
+
+def assoc_exercise(request, plan_id, exercise_id):
+  Plan.objects.get(id=plan_id).exercises.add(exercise_id)
+  return redirect('detail', plan_id=plan_id)
 
 class PlanCreate(CreateView):
   model = Plan

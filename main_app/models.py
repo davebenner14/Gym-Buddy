@@ -22,7 +22,7 @@ class Plan(models.Model):
     name = models.CharField(max_length=100)
     weight = models.IntegerField()
     goal = models.TextField(max_length=250)
-   
+    exercises = models.ManyToManyField(Exercise)
 
     def __str__(self):
         return self.name
