@@ -31,7 +31,7 @@
           <div class="card-content">
             <span class="card-title">
               <p>Meal: {{ meal.name }}</p>
-              $<span style="color: {{ meal.price }}">{{ meal.price }}</span> {{ mael.name }}
+              <span>${{ meal.price }}</span>
             </span>
           </div>
         </div>
@@ -40,5 +40,28 @@
       <h5>No meals 😿</h5>
     {% endif %}
   </div>
+</div>
+<div class="col s6">
+  <h3>Available Meals</h3>
+  {% if meals.count %}
+    {% for meal in meals.all %}
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">
+            <p>Meal: {{ meal.name }}</p>
+            <span>${{ meal.price }}</span>
+          </span>
+        </div>
+        <div class="card-action">
+          <form action="{% url 'assoc_meal' plan.id meal.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn">Add</button>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <h5>{{cat.name}} Already Has All Toys Available</h5>
+  {% endif %}
 </div>
 {% endblock %}
