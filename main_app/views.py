@@ -1,8 +1,11 @@
-from django.shortcuts import render
+import uuid
+import boto3
+import os
+
+from django.shortcuts import render, redirect
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
-from .models import Exercise, Plan, Meal
+from .models import Exercise, Plan, Meal, Photo
 
 # Create your views here.
 def home(request):
@@ -89,4 +92,34 @@ class MealDelete(DeleteView):
   model = Meal
   success_url = '/meals'
 
+def add_photo_for_meal(request, meal_id):
+    add_photo(request, meal_id, 'meal')
+    return redirect('meals_detail', pk=meal_id)
+
+def add_photo_for_exercise(request, exercise_id):
+    add_photo(request, exercise_id, 'exercise')
+    return redirect('exercises_detail', pk=exercise_id)
+
+
+def add_photo(request, model_id, model_type):
+    # photo-file will be the "name" attribute on the <input type="file">
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        # need a unique "key" for S3 / needs image file extension too
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        # just in case something goes wrong
+        try:
+            bucket = os.environ['S3_BUCKET']
+            s3.upload_fileobj(photo_file, bucket, key)
+            # build the full url string
+            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+            if model_type == 'meal':
+                Photo.objects.create(url=url, meal_id=model_id)
+            elif model_type == 'exercise':
+                Photo.objects.create(url=url, exercise_id=model_id)
+        except Exception as e:
+            print('An error occurred uploading file to S3')
+            print(e)
+    
 

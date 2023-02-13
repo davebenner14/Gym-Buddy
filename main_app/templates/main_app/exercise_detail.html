@@ -10,6 +10,29 @@
         <p>Duration: {{exercise.duration}}</p>
         <p>Description: {{exercise.description}}</p>
       </div>
+      {% for photo in exercise.photo_set.all %}
+      <img
+        class="responsive-img card-panel"
+        src="{{photo.url}}"
+        alt="Exercise Photo"
+      />
+      {% empty %}
+      <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+      {% endfor %}
+
+      <!-- new code below -->
+      <form
+        action="{% url 'add_photo_for_exercise' exercise.id %}"
+        enctype="multipart/form-data"
+        method="POST"
+        class="card-panel"
+      >
+        {% csrf_token %}
+        <input type="file" name="photo-file" />
+        <br /><br />
+        <button type="submit" class="btn">Upload Photo</button>
+      </form>
+
       <div class="card-action">
         <a href="{% url 'exercises_update' exercise.id %}">Edit</a>
         <a href="{% url 'exercises_delete' exercise.id %}">Delete</a>
