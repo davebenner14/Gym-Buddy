@@ -19,5 +19,8 @@ urlpatterns = [
   path('meals/<int:pk>/', views.MealDetail.as_view(), name='meals_detail'),
   path('meals/<int:pk>/update/', views.MealUpdate.as_view(), name='meals_update'),
   path('meals/<int:pk>/delete/', views.MealDelete.as_view(), name='meals_delete'),
+  path('meals/<int:meal_id>/add_photo/', views.add_photo_for_meal, name='add_photo_for_meal'),
+  path('exercise/<int:exercise_id>/add_photo/', views.add_photo_for_exercise, name='add_photo_for_exercise')
+  
 ]
 
