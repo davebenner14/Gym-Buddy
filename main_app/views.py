@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -54,7 +54,12 @@ def plans_index(request):
 
 def plans_detail(request, plan_id):
   plan = Plan.objects.get(id=plan_id)
-  return render(request, 'plans/detail.html', { 'plan': plan })
+  id_list = plan.meals.all().values_list('id')
+  meals_plan_doesnt_have = Meal.objects.exclude(id__in=id_list)
+  return render(request, 'plans/detail.html', {
+      'plan': plan,
+      'meals': meals_plan_doesnt_have,
+    })
 
 class PlanCreate(CreateView):
   model = Plan
@@ -89,4 +94,10 @@ class MealDelete(DeleteView):
   model = Meal
   success_url = '/meals'
 
+def assoc_meal(request, plan_id, meal_id):
+  Plan.objects.get(id=plan_id).meals.add(meal_id)
+  return redirect('detail', plan_id=plan_id)
 
+def unassoc_meal(request, plan_id, meal_id):
+  Plan.objects.get(id=plan_id).meals.remove(meal_id)
+  return redirect('detail', plan_id=plan_id)
