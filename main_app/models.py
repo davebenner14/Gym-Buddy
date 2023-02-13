@@ -40,4 +40,15 @@ class Meal(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('toys_detail', kwargs={'pk': self.id})
+        return reverse('meals_detail', kwargs={'pk': self.id})
+
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    meal = models.ForeignKey(Meal, on_delete=models.CASCADE, null=True, blank=True)
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        if self.meal_id:
+            return f"Photo for meal_id: {self.meal_id} @{self.url}"
+        elif self.exercise_id:
+            return f"Photo for exercise_id: {self.exercise_id} @{self.url}"
