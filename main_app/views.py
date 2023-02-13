@@ -95,6 +95,9 @@ class MealDelete(DeleteView):
   success_url = '/meals'
 
 def assoc_meal(request, plan_id, meal_id):
-  # Note that you can pass a toy's id instead of the whole toy object
   Plan.objects.get(id=plan_id).meals.add(meal_id)
+  return redirect('detail', plan_id=plan_id)
+
+def unassoc_meal(request, plan_id, meal_id):
+  Plan.objects.get(id=plan_id).meals.remove(meal_id)
   return redirect('detail', plan_id=plan_id)

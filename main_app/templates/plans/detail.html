@@ -34,6 +34,12 @@
               <span>${{ meal.price }}</span>
             </span>
           </div>
+          <div class="card-action">
+            <form action="{% url 'unassoc_meal' plan.id meal.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn">Remove</button>
+            </form>
+          </div>
         </div>
       {% endfor %}
     {% else %}
@@ -61,7 +67,7 @@
       </div>
     {% endfor %}
   {% else %}
-    <h5>{{cat.name}} Already Has All Toys Available</h5>
+    <h5>{{cat.name}} Already Has All Meals Available</h5>
   {% endif %}
 </div>
 {% endblock %}
