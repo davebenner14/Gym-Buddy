@@ -31,6 +31,15 @@
       <div class="card-content">
         <span class="card-title"> {{ exercise.TypeOfWorkout }} </span>
       </div>
+      <div class="card-action">
+        <form
+          action="{% url 'unassoc_exercise' plan.id exercise.id %}"
+          method="POST"
+        >
+          {% csrf_token %}
+          <button type="submit" class="btn">Remove</button>
+        </form>
+      </div>
     </div>
     {% endfor %} {% else %}
     <h5>No Exercises</h5>
@@ -54,7 +63,7 @@
       </div>
     </div>
     {% endfor %} {% else %}
-    <h5>{{plan.name}} Already Has All Toys Available</h5>
+    <h5>{{plan.name}} Already Has All Exercises Available</h5>
     {% endif %}
   </div>
 </div>

@@ -63,6 +63,11 @@ def assoc_exercise(request, plan_id, exercise_id):
   Plan.objects.get(id=plan_id).exercises.add(exercise_id)
   return redirect('detail', plan_id=plan_id)
 
+
+def unassoc_exercise(request, plan_id, exercise_id):
+  Plan.objects.get(id=plan_id).exercises.remove(exercise_id)
+  return redirect('detail', plan_id=plan_id)
+
 class PlanCreate(CreateView):
   model = Plan
   fields = ['name', 'weight', 'goal']
