@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
+from .forms import CommentForm
 from .models import Exercise, Plan, Meal
 
 # Create your views here.
@@ -56,7 +56,9 @@ def plans_detail(request, plan_id):
   plan = Plan.objects.get(id=plan_id)
   id_list = plan.exercises.all().values_list('id')
   exercises_plan_doesnt_have = Exercise.objects.exclude(id__in=id_list)
-  return render(request, 'plans/detail.html', { 'plan': plan, 'exercises': exercises_plan_doesnt_have })
+  id_list = plan.meals.all().values_list('id')
+  meals_plan_doesnt_have = Meal.objects.exclude(id__in=id_list)
+  return render(request, 'plans/detail.html', { 'plan': plan, 'exercises': exercises_plan_doesnt_have, 'meals': meals_plan_doesnt_have, })
 
 
 def assoc_exercise(request, plan_id, exercise_id):
@@ -67,7 +69,9 @@ def assoc_exercise(request, plan_id, exercise_id):
 def unassoc_exercise(request, plan_id, exercise_id):
   Plan.objects.get(id=plan_id).exercises.remove(exercise_id)
   return redirect('detail', plan_id=plan_id)
-
+  
+  
+ 
 class PlanCreate(CreateView):
   model = Plan
   fields = ['name', 'weight', 'goal']
@@ -101,4 +105,18 @@ class MealDelete(DeleteView):
   model = Meal
   success_url = '/meals'
 
+def assoc_meal(request, plan_id, meal_id):
+  Plan.objects.get(id=plan_id).meals.add(meal_id)
+  return redirect('detail', plan_id=plan_id)
+
+def unassoc_meal(request, plan_id, meal_id):
+  Plan.objects.get(id=plan_id).meals.remove(meal_id)
+  return redirect('detail', plan_id=plan_id)
+
+
+def commentview(request):
+  commentform = CommentForm()
+  if request.method__'Exercise':
+    commentform = commentform(request.Exercise)
+    if commentform
 
