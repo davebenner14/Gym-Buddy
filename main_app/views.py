@@ -96,5 +96,3 @@ class MealUpdate(UpdateView):
 class MealDelete(DeleteView):
   model = Meal
   success_url = '/meals'
-
-
