@@ -70,4 +70,49 @@
     <h5>{{cat.name}} Already Has All Meals Available</h5>
   {% endif %}
 </div>
+<hr />
+<div class="row">
+  <div class="col s6">
+    <h3>{{ plan.name }}'s Exercises</h3>
+    {% if plan.exercises.count %} {% for exercise in plan.exercises.all %}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title"> {{ exercise.TypeOfWorkout }} </span>
+      </div>
+      <div class="card-action">
+        <form
+          action="{% url 'unassoc_exercise' plan.id exercise.id %}"
+          method="POST"
+        >
+          {% csrf_token %}
+          <button type="submit" class="btn">Remove</button>
+        </form>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <h5>No Exercises</h5>
+    {% endif %}
+  </div>
+  <div class="col s6">
+    <h3>Available Exercises</h3>
+    {% if exercises.count %} {% for exercise in exercises.all %}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title"> {{ exercise.TypeOfWorkout }} </span>
+      </div>
+      <div class="card-action">
+        <form
+          action="{% url 'assoc_exercise' plan.id exercise.id %}"
+          method="POST"
+        >
+          {% csrf_token %}
+          <button type="submit" class="btn">Add</button>
+        </form>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <h5>{{plan.name}} Already Has All Exercises Available</h5>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}
