@@ -62,7 +62,7 @@ class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     
 
-    def__str__(self):
+    def __str__(self):
         return f'comment from {self.name} on {self.exercise}'
 
     def get_absolute_url(self):
