@@ -6,6 +6,12 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Exercise, Plan, Meal, Photo
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
 
 # Create your views here.
 def home(request):
@@ -48,9 +54,9 @@ class ExerciseDelete(DeleteView):
   model = Exercise
   success_url = '/exercises' 
 
-
+@login_required
 def plans_index(request):
-  plans = Plan.objects.all()
+  plans = Plan.objects.filter(user=request.user)
   return render(request, 'plans/index.html', {
     'plans': plans
   })
@@ -59,9 +65,17 @@ def plans_detail(request, plan_id):
   plan = Plan.objects.get(id=plan_id)
   return render(request, 'plans/detail.html', { 'plan': plan })
 
-class PlanCreate(CreateView):
+class PlanCreate(LoginRequiredMixin, CreateView):
   model = Plan
   fields = ['name', 'weight', 'goal']
+
+    # This inherited method is called when a
+  # valid plan form is being submitted
+  def form_valid(self, form):
+    # Assign the logged in user (self.request.user)
+    form.instance.user = self.request.user 
+    # Let the CreateView do its job as usual
+    return super().form_valid(form)
 
   # fields = '__all__'
   # success_url = '/plans/{plan_id}'
@@ -121,5 +135,19 @@ def add_photo(request, model_id, model_type):
         except Exception as e:
             print('An error occurred uploading file to S3')
             print(e)
-    
+
+def signup(request):
+  error_message = ''
+  if request.method == 'POST':
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      user = form.save()
+      login(request, user)
+      return redirect('index')
+    else:
+      error_message = 'Invalid sign up - try again'
+  form = UserCreationForm()
+  context = {'form': form, 'error_message': error_message}
+  return render(request, 'registration/signup.html', context)
+
 
