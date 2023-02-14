@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .forms import CommentForm
+
 from .models import Exercise, Plan, Meal
 
 # Create your views here.
@@ -45,36 +45,28 @@ class ExerciseDelete(DeleteView):
   model = Exercise
   success_url = '/exercises' 
 
-
+@login_required
 def plans_index(request):
-  plans = Plan.objects.all()
+  plans = Plan.objects.filter(user=request.user)
   return render(request, 'plans/index.html', {
     'plans': plans
   })
 
 def plans_detail(request, plan_id):
   plan = Plan.objects.get(id=plan_id)
-  id_list = plan.exercises.all().values_list('id')
-  exercises_plan_doesnt_have = Exercise.objects.exclude(id__in=id_list)
-  id_list = plan.meals.all().values_list('id')
-  meals_plan_doesnt_have = Meal.objects.exclude(id__in=id_list)
-  return render(request, 'plans/detail.html', { 'plan': plan, 'exercises': exercises_plan_doesnt_have, 'meals': meals_plan_doesnt_have, })
+  return render(request, 'plans/detail.html', { 'plan': plan })
 
-
-def assoc_exercise(request, plan_id, exercise_id):
-  Plan.objects.get(id=plan_id).exercises.add(exercise_id)
-  return redirect('detail', plan_id=plan_id)
-
-
-def unassoc_exercise(request, plan_id, exercise_id):
-  Plan.objects.get(id=plan_id).exercises.remove(exercise_id)
-  return redirect('detail', plan_id=plan_id)
-  
-  
- 
 class PlanCreate(CreateView):
   model = Plan
   fields = ['name', 'weight', 'goal']
+
+    # This inherited method is called when a
+  # valid plan form is being submitted
+  def form_valid(self, form):
+    # Assign the logged in user (self.request.user)
+    form.instance.user = self.request.user 
+    # Let the CreateView do its job as usual
+    return super().form_valid(form)
 
   # fields = '__all__'
   # success_url = '/plans/{plan_id}'
@@ -105,18 +97,4 @@ class MealDelete(DeleteView):
   model = Meal
   success_url = '/meals'
 
-def assoc_meal(request, plan_id, meal_id):
-  Plan.objects.get(id=plan_id).meals.add(meal_id)
-  return redirect('detail', plan_id=plan_id)
-
-def unassoc_meal(request, plan_id, meal_id):
-  Plan.objects.get(id=plan_id).meals.remove(meal_id)
-  return redirect('detail', plan_id=plan_id)
-
-
-def commentview(request):
-  commentform = CommentForm()
-  if request.method__'Exercise':
-    commentform = commentform(request.Exercise)
-    if commentform
 

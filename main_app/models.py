@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 
@@ -36,6 +37,7 @@ class Plan(models.Model):
     name = models.CharField(max_length=100)
     weight = models.IntegerField()
     goal = models.TextField(max_length=250)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     exercises = models.ManyToManyField(Exercise)
     meals = models.ManyToManyField(Meal)
 
@@ -63,5 +65,18 @@ class Comment(models.Model):
     def__str__(self):
         return f'comment from {self.name} on {self.exercise}'
 
+    def get_absolute_url(self):
+        return reverse('meals_detail', kwargs={'pk': self.id})
+
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    meal = models.ForeignKey(Meal, on_delete=models.CASCADE, null=True, blank=True)
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        if self.meal_id:
+            return f"Photo for meal_id: {self.meal_id} @{self.url}"
+        elif self.exercise_id:
+            return f"Photo for exercise_id: {self.exercise_id} @{self.url}"
 
     
