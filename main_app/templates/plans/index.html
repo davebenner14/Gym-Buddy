@@ -1,5 +1,5 @@
-{% extends 'base.html' %} {% block content %}
-
+{% extends 'base.html' %} {% block content %} {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
 <h1>Health Plans</h1>
 
 {% for plan in plans %}
@@ -11,5 +11,5 @@
       <p>Plan Goal: {{ plan.goal }}</p>
     </div>
   </div>
-  {% endfor %} {% endblock %}
 </a>
+{% endfor %} {% endblock %}
