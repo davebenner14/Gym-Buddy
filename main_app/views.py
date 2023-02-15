@@ -4,12 +4,13 @@ import os
 from django.shortcuts import render, redirect
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Exercise, Plan, Meal, Photo
+from .models import Exercise, Plan, Meal, Photo, Comment
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from .forms import CommentForm
+from django.shortcuts import render, get_object_or_404, redirect
 # Create your views here.
 def home(request):
   return render(request, 'home.html')
@@ -42,6 +43,52 @@ class ExerciseList(ListView):
 
 class ExerciseDetail(DetailView):
   model = Exercise
+
+
+
+  def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)
+      pk = self.kwargs["pk"]
+      # slug = self.kwargs["slug"]
+
+      form = CommentForm()
+      exercise = get_object_or_404(Exercise, pk=pk)
+      comments = exercise.comment_set.all()
+
+      context['exercise'] = exercise
+      context['comments'] = comments
+      context['form'] = form
+      return context
+
+  def exercise(self, request, *args, **kwargs):
+      form = CommentForm(request.Exercise)
+      self.object = self.get_object()
+      context = super().get_context_data(**kwargs)
+
+      exercise = Exercise.objects.filter(id=self.kwargs['pk'])[0]
+      comments = exercise.comment_set.all()
+
+      context['exercise'] = exercise
+      context['comments'] = comments
+      context['form'] = form
+
+      if form.is_valid():
+          name = form.cleaned_data['name']
+          email = form.cleaned_data['email']
+          content = form.cleaned_data['content']
+
+          comment = Comment.objects.create(
+              name=name, email=email, content=content, exercise=exercise
+          )
+
+          form = CommentForm()
+          context['form'] = form
+          return self.render_to_response(context=context)
+
+      return self.render_to_response(context=context)
+      return redirect('exercise-detail', pk=exercise.pk)
+
+
 
 class ExerciseUpdate(UpdateView):
   model = Exercise
@@ -168,3 +215,5 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
+
+

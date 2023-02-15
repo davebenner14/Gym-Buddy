@@ -42,4 +42,13 @@
     </div>
   </div>
 </div>
+<h2>Add a comment</h2>
+<form
+  method="post"
+  action="{% url 'add_comment' exercise.pk %}"
+  data-remote="true"
+>
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Submit</button>
+</form>
 {% endblock %}
