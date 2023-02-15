@@ -84,16 +84,38 @@ class Photo(models.Model):
         elif self.exercise_id:
             return f"Photo for exercise_id: {self.exercise_id} @{self.url}"
 
+# class Comment(models.Model):
+#     email = models.EmailField()
+#     name = models.CharField(max_length=50)
+#     body = models.TextField()
+#     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, related_name='comments')
+#     rating = models.FloatField(default=0) 
+#     created = models.DateTimeField(auto_now_add=True)
+
+#     def __str__(self):
+#         return f'comment from {self.name} on {self.exercise}'
+
+#     def get_absolute_url(self):
+#         return reverse('meals_detail', kwargs={'pk': self.id})
+
 class Comment(models.Model):
     email = models.EmailField()
     name = models.CharField(max_length=50)
     body = models.TextField()
-    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, related_name='comments')
-    rating = models.IntegerField(default=0)  # New field
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
+    meal = models.ForeignKey(Meal, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
+    rating = models.FloatField(default=0) 
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'comment from {self.name} on {self.exercise}'
+        if self.exercise:
+            return f'comment from {self.name} on {self.exercise}'
+        else:
+            return f'comment from {self.name} on {self.meal}'
 
     def get_absolute_url(self):
-        return reverse('meals_detail', kwargs={'pk': self.id})
+        if self.exercise:
+            return reverse('exercises_detail', kwargs={'pk': self.exercise.id})
+        else:
+            return reverse('meals_detail', kwargs={'pk': self.meal.id})
+

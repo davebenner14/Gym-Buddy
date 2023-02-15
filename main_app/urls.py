@@ -28,7 +28,6 @@ urlpatterns = [
   path('exercise/<int:exercise_id>/add_photo/', views.add_photo_for_exercise, name='add_photo_for_exercise'),
   path('accounts/signup/', views.signup, name='signup'),
   path('exercises/<int:pk>/comment/', views.add_comment_for_exercise, name='add_comment_for_exercise'),
-
-
+  path('meals/<int:pk>/comment/', views.add_comment_for_meal, name='add_comment_for_meal'),
 ]
 

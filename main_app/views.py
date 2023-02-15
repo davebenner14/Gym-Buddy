@@ -4,12 +4,13 @@ import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Exercise, Plan, Meal, Photo
+from .models import Exercise, Plan, Meal, Photo, Comment
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Exercise, Comment
+from django.db.models import Avg
+
 
 # from .forms import MealForm, ExerciseForm
 
@@ -174,4 +175,35 @@ def add_comment_for_exercise(request, pk):
         rating = request.POST['rating']
         comment = Comment(name=name, body=body, rating=rating, exercise=exercise)
         comment.save()
+        average_rating = Comment.objects.filter(exercise=exercise).aggregate(Avg('rating'))['rating__avg']
+        exercise.average_rating = round(average_rating, 2) if average_rating is not None else None
+        exercise.save()
+
     return redirect('exercises_detail', pk=pk)
+
+def exercises_detail(request, pk):
+    exercise = get_object_or_404(Exercise, pk=pk)
+    average_rating = Comment.objects.filter(exercise=exercise).aggregate(Avg('rating'))['rating__avg']
+    context = {'exercise': exercise, 'average_rating': average_rating}
+    return render(request, 'exercises/exercises_detail.html', context)
+
+def add_comment_for_meal(request, pk):
+    meal = get_object_or_404(Meal, pk=pk)
+    if request.method == 'POST':
+        name = request.POST['name']
+        body = request.POST['body']
+        rating = request.POST['rating']
+        comment = Comment(name=name, body=body, rating=rating, meal=meal)
+        comment.save()
+        average_rating = Comment.objects.filter(meal=meal).aggregate(Avg('rating'))['rating__avg']
+        meal.average_rating = round(average_rating, 2) if average_rating is not None else None
+        meal.save()
+
+    return redirect('meals_detail', pk=pk)
+
+
+def meals_detail(request, pk):
+    meal = get_object_or_404(Meal, pk=pk)
+    average_rating = Comment.objects.filter(meal=meal).aggregate(Avg('rating'))['rating__avg']
+    context = {'meal': meal, 'average_rating': average_rating}
+    return render(request, 'meals/meal_detail.html', context)
