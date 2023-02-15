@@ -16,6 +16,7 @@
       type="text/css"
       href="{% static 'css/style.css' %}"
     />
+
   </head>
   <body>
     <header class="navbar-fixed">
@@ -23,20 +24,36 @@
         <div class="nav-wrapper">
           <ul>
             <li>
-              <a href="/" class="left brand-logo">&nbsp;&nbsp;Gym Buddy</a>
+              <a href="/" class="left brand-logo">&nbsp;&nbsp;GymBuddy</a>
             </li>
           </ul>
           <ul class="right">
             <li><a href="{% url 'about'  %}">About</a></li>
             {% if user.is_authenticated %}
-            <li><a href="{% url 'plans_create' %}">Add Health Plans</a></li>
-            <li><a href="{% url 'index' %}">View All Health Plans</a></li>
-            <li><a href="{% url 'exercises_create' %}">Add a Exercise</a></li>
             <li>
-              <a href="{% url 'exercises_index'  %}">View All My Exercises</a>
+              <a href="#">Health plans</a>
+              <ul>
+                <li><a href="{% url 'plans_create' %}">Add Health Plans</a></li>
+                <li><a href="{% url 'index' %}">View All Health Plans</a></li>
+              </ul>
             </li>
-            <li><a href="{% url 'meals_create' %}">Add Meal</a></li>
-            <li><a href="{% url 'meals_index' %}">View All Meals</a></li>
+
+            <li>
+              <a href="#">Exercise plans</a>
+              <ul>
+                <li><a href="{% url 'exercises_create' %}">Add a Exercise</a></li>
+                <li><a href="{% url 'exercises_index'  %}">View All My Exercises</a></li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#">Meal plans</a>
+              <ul>
+                <li><a href="{% url 'meals_create' %}">Add Meal</a></li>
+                <li><a href="{% url 'meals_index' %}">View All Meals</a></li>
+              </ul>
+            </li>
+
             {% else %}
             <li><a href="{% url 'signup' %}">Sign Up</a></li>
             <li><a href="{% url 'login' %}">Log In</a></li>

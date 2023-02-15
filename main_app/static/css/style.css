@@ -11,11 +11,46 @@ main {
 footer.page-footer {
   padding-top: 0;
   text-align: right;
-  background-color: gray;
+  background-color: black;
 }
 
 nav .nav-wrapper {
   position: relative;
   height: 100%;
-  background-color: gray;
+  background-color: black;
+}
+
+nav ul li {
+  display: inline-block;
+  position: relative;
+  margin-right: 20px;
+}
+
+nav ul li:hover ul {
+  display: block;
+}
+
+nav ul ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+}
+
+nav ul ul li {
+  display: block;
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin: 0;
+}
+
+nav ul ul li a {
+  color: #333;
+  text-decoration: none;
+}
+
+nav ul ul li a:hover {
+  color: #fff;
+  background-color: #333;
 }
