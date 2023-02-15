@@ -28,6 +28,6 @@ urlpatterns = [
   path('meals/<int:meal_id>/add_photo/', views.add_photo_for_meal, name='add_photo_for_meal'),
   path('exercise/<int:exercise_id>/add_photo/', views.add_photo_for_exercise, name='add_photo_for_exercise'),
   path('accounts/signup/', views.signup, name='signup'),
-  path('exercises/<int:pk>/add_comment/', views.add_comment, name='add_comment'),
+  
 ]
 

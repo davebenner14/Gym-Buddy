@@ -19,7 +19,7 @@
         <span class="badge badge-dark ml-2">{{ comments.count }}</span>
       </div>
       {% for comment in comments %}
-      <div class="col-lg-6 offset-lg-3 mt-2">
+      <div class="col s6 col-offset-3">
         <div class="card p-2">
           <div class="row">
             <div class="col-12">
@@ -39,7 +39,7 @@
     <div class="row mt-5">
       <div class="col-lg-6 offset-lg-3">
         <h3>Leave a comment</h3>
-        <form method='POST' action="{% url 'add_comment' pk=exercise.pk %}">
+        <form method='POST' action="{% url 'exercises_detail' exercise.id %}">
           {% csrf_token %}
           <div class="form-group">
             <span class="ml-2"></span>{{ form.name.label_tag }}
