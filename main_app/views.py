@@ -10,7 +10,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CommentForm
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 # Create your views here.
 def home(request):
   return render(request, 'home.html')
@@ -85,9 +86,10 @@ class ExerciseDetail(DetailView):
           context['form'] = form
           return self.render_to_response(context=context)
 
-      return self.render_to_response(context=context)
-      return redirect('exercise-detail', pk=exercise.pk)
-
+     
+  
+def add_comment(request, pk):
+        return redirect(reverse('add_comment', kwargs={'pk': pk}))
 
 
 class ExerciseUpdate(UpdateView):

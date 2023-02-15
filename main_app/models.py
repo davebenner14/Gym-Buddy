@@ -55,10 +55,10 @@ class Plan(models.Model):
 
 
 class Comment(models.Model):
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=100)
     content = models.TextField()
-    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:

@@ -39,7 +39,7 @@
     <div class="row mt-5">
       <div class="col-lg-6 offset-lg-3">
         <h3>Leave a comment</h3>
-        <form method='POST'>
+        <form method='POST' action="{% url 'add_comment' pk=exercise.pk %}">
           {% csrf_token %}
           <div class="form-group">
             <span class="ml-2"></span>{{ form.name.label_tag }}
