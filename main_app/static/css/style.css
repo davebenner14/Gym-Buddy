@@ -75,3 +75,17 @@ nav ul ul li a:hover {
 .home-page-content {
   text-align: center;
 }
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.loginout {
+  flex: 1;
+}
+
+.loginout-img {
+  margin-left: 20px;
+}
