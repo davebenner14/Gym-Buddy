@@ -34,6 +34,11 @@
         <br /><br />
         <button type="submit" class="btn">Upload Photo</button>
       </form>
+      <h1>Rate {{ meal.name }}</h1>
+      <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit">Submit</button>
+      </form>
 
       <div class="card-action">
         <a href="{% url 'meals_update' meal.id %}">Edit</a>

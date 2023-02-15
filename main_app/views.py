@@ -1,7 +1,7 @@
 import uuid
 import boto3
 import os
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Exercise, Plan, Meal, Photo
@@ -9,6 +9,11 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Exercise, Comment
+
+# from .forms import MealForm, ExerciseForm
+
+
 
 # Create your views here.
 def home(request):
@@ -160,3 +165,13 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
+
+def add_comment_for_exercise(request, pk):
+    exercise = get_object_or_404(Exercise, pk=pk)
+    if request.method == 'POST':
+        name = request.POST['name']
+        body = request.POST['body']
+        rating = request.POST['rating']
+        comment = Comment(name=name, body=body, rating=rating, exercise=exercise)
+        comment.save()
+    return redirect('exercises_detail', pk=pk)
