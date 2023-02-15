@@ -89,3 +89,7 @@ nav ul ul li a:hover {
 .loginout-img {
   margin-left: 20px;
 }
+
+.btn {
+  background-color: black;
+}
