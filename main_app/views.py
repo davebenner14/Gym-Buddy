@@ -195,8 +195,8 @@ def add_comment_for_meal(request, pk):
         rating = request.POST['rating']
         comment = Comment(name=name, body=body, rating=rating, meal=meal)
         comment.save()
-        average_rating = Comment.objects.filter(meal=meal).aggregate(Avg('rating'))['rating__avg']
-        meal.average_rating = round(average_rating, 2) if average_rating is not None else None
+        # average_rating = Comment.objects.filter(meal=meal).aggregate(Avg('rating'))['rating__avg']
+        # meal.average_rating = round(average_rating, 2) if average_rating is not None else None
         meal.save()
 
     return redirect('meals_detail', pk=pk)
@@ -204,6 +204,8 @@ def add_comment_for_meal(request, pk):
 
 def meals_detail(request, pk):
     meal = get_object_or_404(Meal, pk=pk)
-    average_rating = Comment.objects.filter(meal=meal).aggregate(Avg('rating'))['rating__avg']
+    average_rating = Comment.objects.filter(meal=meal).aggregate(Avg('rating'))
+    print('average_rating: ' + str(average_rating))  
+    print("test")
     context = {'meal': meal, 'average_rating': average_rating}
     return render(request, 'meals/meal_detail.html', context)
