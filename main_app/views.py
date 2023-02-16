@@ -48,6 +48,7 @@ class ExerciseList(ListView):
 
 class ExerciseDetail(DetailView):
   model = Exercise
+  
 
 class ExerciseUpdate(UpdateView):
   model = Exercise
@@ -195,8 +196,6 @@ def add_comment_for_meal(request, pk):
         rating = request.POST['rating']
         comment = Comment(name=name, body=body, rating=rating, meal=meal)
         comment.save()
-        # average_rating = Comment.objects.filter(meal=meal).aggregate(Avg('rating'))['rating__avg']
-        # meal.average_rating = round(average_rating, 2) if average_rating is not None else None
         meal.save()
 
     return redirect('meals_detail', pk=pk)

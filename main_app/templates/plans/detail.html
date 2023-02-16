@@ -4,7 +4,7 @@
 
 <div class="row">
   <div class="col s6">
-    <div class="card">
+    <div class="card3">
       <div class="card-content">
         <span class="card-title">{{ plan.name }}</span>
         {% if plan.weight > 0 %}
@@ -26,7 +26,7 @@
     <div class="col s6">
       <h3>{{ plan.name }}'s Meal</h3>
       {% if plan.meals.count %} {% for meal in plan.meals.all %}
-      <div class="card">
+      <div class="card3">
         <div class="card-content">
           <span class="card-title">
             <p>Meal: {{ meal.name }}</p>
@@ -48,7 +48,7 @@
   <div class="col s6">
     <h3>Available Meals</h3>
     {% if meals.count %} {% for meal in meals.all %}
-    <div class="card">
+    <div class="card3">
       <div class="card-content">
         <span class="card-title">
           <p>Meal: {{ meal.name }}</p>

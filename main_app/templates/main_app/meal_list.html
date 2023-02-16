@@ -1,19 +1,32 @@
-{% extends 'base.html' %}
-{% block content %}
-
+{% extends 'base.html' %} {% block content %}
+<style>
+  h1 {
+    color: black;
+    font-size: 2.5em;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+</style>
 <h1>Meal List</h1>
+<div class="card-container">
+  {% for meal in meal_list %}
 
-{% for meal in meal_list %}
-<a href="{% url 'meals_detail' meal.id %}">
-    <div class="card">
-        <div class="card-content">
-            <span class="card-title">{{ meal.name }}</span>
-            <p>Description: {{ meal.description }}</p>
-            <p>Price: {{ meal.price }}</p>
-            <p>Date Created: {{ meal.created_at }}</p>
-        </div>
+  <a href="{% url 'meals_detail' meal.id %}" class="card">
+    <img
+      src="https://imgur.com/fC9EqeC.png"
+      alt="{{ meal.name}}"
+      class="card-image2"
+    />
+    <div class="card-content">
+      <span class="card-title2">{{ meal.name }}</span>
+      <p class="card-text 2">Description: {{ meal.description }}</p>
+      <p class="card-text 2">Price: {{ meal.price }}</p>
+      <p class="card-text 2">Date Created: {{ meal.created_at }}</p>
     </div>
   </a>
-{% endfor %}
-
+  {% endfor %}
+</div>
 {% endblock %}
