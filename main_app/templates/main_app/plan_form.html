@@ -1,14 +1,23 @@
-{% extends 'base.html' %} {% block content %} {% if object %}
-<h1>Edit <span class="teal-text">{{object.name}}</span></h1>
-{% else %}
-<h1>Add Health Plan</h1>
-{% endif %}
+{% extends 'base.html' %} {% block content %} 
 
-<form action="" method="POST">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-  </table>
-  <input type="submit" value="Submit!" class="btn" />
-</form>
+<div class="log-container">
+  {% if object %}
+  <h1>Edit <span class="teal-text">{{object.name}}</span></h1>
+  {% else %}
+  <h1>Add Health Plan</h1>
+  {% endif %}
+  
+  <form action="" method="POST">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit!" class="btn" />
+  </form>
+</div>
+
+<div class="loginout-img">
+  <img src="../../static/img/healthplanadd.jpeg" alt="">
+</div>
+
 {% endblock %}
