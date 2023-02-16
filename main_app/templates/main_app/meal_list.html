@@ -10,7 +10,34 @@
     text-align: center;
   }
 </style>
-<h1>Meal List</h1>
+
+<h1>Exercise List</h1>
+
+<div class="card-container">
+  {% for meal in meal_list %}
+
+  <a href="{% url 'meals_detail' meal.id %}" class="card">
+    <div class="card-content">
+      {% for photo in meal.photo_set.all %}
+      <img
+        class="responsive-img card-panel"
+        src="{{photo.url}}"
+        alt="Meal Photo"
+      />
+      {% empty %}
+      <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+      {% endfor %}
+      <span class="card-title2">{{ meal.name }}</span>
+      <p class="card-text 2">Description: {{ meal.description }}</p>
+      <p class="card-text 2">Price: {{ meal.price }}</p>
+      <p class="card-text 2">Date Created: {{ meal.created_at }}</p>
+    </div>
+  </a>
+
+  {% endfor %}
+</div>
+
+<!-- <h1>Meal List</h1>
 <div class="card-container">
   {% for meal in meal_list %}
 
@@ -28,5 +55,6 @@
     </div>
   </a>
   {% endfor %}
-</div>
+</div> -->
+
 {% endblock %}
