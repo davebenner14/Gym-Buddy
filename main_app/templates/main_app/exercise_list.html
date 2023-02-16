@@ -1,16 +1,28 @@
 {% extends 'base.html' %} {% block content %}
-
+<style>
+  h1 {
+    color: black;
+    font-size: 2.5em;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+</style>
 <h1>Exercise List</h1>
+<div class="card-container">
+  {% for exercise in exercise_list %}
 
-{% for exercise in exercise_list %}
-<div class="card">
-  <a href="{% url 'exercises_detail' exercise.id %}">
+  <a href="{% url 'exercises_detail' exercise.id %}" class="card">
+    <img src="" alt="" />
     <div class="card-content">
-      <span class="card-title"> {{exercise.TypeOfWorkout}} </span>
-      <p>Duration: {{exercise.duration}}</p>
-      <p>Description: {{exercise.description}}</p>
+      <span class="card-title3"> {{exercise.TypeOfWorkout}} </span>
+      <p class="card-text 3">Duration: {{exercise.duration}}</p>
+      <p class="card-text 3">Description: {{exercise.description}}</p>
     </div>
-  </div>
   </a>
 
-{% endfor %} {% endblock %}
+  {% endfor %}
+</div>
+{% endblock %}

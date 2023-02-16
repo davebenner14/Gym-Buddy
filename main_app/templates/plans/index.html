@@ -1,16 +1,33 @@
 {% extends 'base.html' %} {% block content %} {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
 
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+<style>
+  h1 {
+    color: #0e538c;
+    font-size: 2.5em;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+</style>
 <h1>Health Plans</h1>
 
-{% for plan in plans %}
-<a href="{% url 'detail' plan.id %}">
-  <div class="card">
+<div class="card-container">
+  {% for plan in plans %}
+  <a href="{% url 'detail' plan.id %}" class="card">
+    <img
+      src="https://imgur.com/QvBNaeg.png"
+      alt="{{ plan.name }}"
+      class="card-image"
+    />
     <div class="card-content">
-      <span class="card-title">{{ plan.name }}</span>
-      <p>Current Weight (Optional): {{ plan.weight }}</p>
-      <p>Plan Goal: {{ plan.goal }}</p>
+      <h2 class="card-title">{{ plan.name }}</h2>
+      <p class="card-text">Current Weight (Optional): {{ plan.weight }}</p>
+      <p class="card-text">Plan Goal: {{ plan.goal }}</p>
     </div>
-  </div>
-</a>
-{% endfor %} {% endblock %}
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}
