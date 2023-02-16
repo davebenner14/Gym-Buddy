@@ -11,12 +11,22 @@
   }
 </style>
 <h1>Exercise List</h1>
+
 <div class="card-container">
   {% for exercise in exercise_list %}
 
   <a href="{% url 'exercises_detail' exercise.id %}" class="card">
-    <img src="" alt="" />
     <div class="card-content">
+      {% for photo in exercise.photo_set.all %}
+      <img
+        class="responsive-img card-panel"
+        src="{{photo.url}}"
+        alt="Exercise Photo"
+      />
+      {% empty %}
+      <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+      {% endfor %}
+
       <span class="card-title3"> {{exercise.TypeOfWorkout}} </span>
       <p class="card-text 3">Duration: {{exercise.duration}}</p>
       <p class="card-text 3">Description: {{exercise.description}}</p>
@@ -25,4 +35,5 @@
 
   {% endfor %}
 </div>
+
 {% endblock %}
