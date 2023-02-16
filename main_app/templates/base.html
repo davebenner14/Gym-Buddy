@@ -24,7 +24,7 @@
         <div class="nav-wrapper">
           <ul>
             <li>
-              <a href="/" class="left brand-logo">&nbsp;&nbsp;GymBuddy</a>
+              <a href="/" class="left-brand-logo">&nbsp;&nbsp;GymBuddy</a>
             </li>
           </ul>
           <ul class="right">
@@ -53,7 +53,7 @@
                 <li><a href="{% url 'meals_index' %}">View All Meals</a></li>
               </ul>
             </li>
-
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
             {% else %}
             <li><a href="{% url 'signup' %}">Sign Up</a></li>
             <li><a href="{% url 'login' %}">Log In</a></li>
@@ -68,3 +68,4 @@
     </footer>
   </body>
 </html>
+

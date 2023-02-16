@@ -14,6 +14,19 @@ footer.page-footer {
   background-color: black;
 }
 
+.left-brand-logo {
+  font-family: Oswald;
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.right {
+  font-family: Poppins;
+  font-size: 16px;
+  margin-right: 200px;
+}
+
 nav .nav-wrapper {
   position: relative;
   height: 100%;
@@ -43,6 +56,7 @@ nav ul ul li {
   background-color: #f2f2f2;
   padding: 10px;
   margin: 0;
+  min-width: 200px;
 }
 
 nav ul ul li a {
@@ -139,5 +153,58 @@ nav ul ul li a:hover {
   margin-top: 5px;
   margin-bottom: 25px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.home-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.home-page-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex: 1;
+}
+
+.home-page-img img {
+  width: 100vw;
+  object-fit: cover;
+}
+
+.home-page-content p {
+  text-align: justify;
+  line-height: 1.5;
+}
+
+.home-page-content {
+  text-align: center;
+}
+
+.log-container {
+  float: left;
+  width: 45%;
+}
+
+.log-container h1 {
+  font-family: Poppins;
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.loginout-img {
+  float: right;
+  width: 45%;
+}
+
+.btn {
+  background-color: black;
+  border-radius: 10px;
+}
+
+.btn:hover {
+  background-color: white;
   color: black;
 }
