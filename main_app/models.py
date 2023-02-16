@@ -2,9 +2,6 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 
-
-
-
 # Create your models here.
 class Meal(models.Model):
     name = models.CharField(max_length=50)
@@ -23,16 +20,12 @@ class Exercise(models.Model):
     duration = models.IntegerField()
     description = models.TextField(max_length=250)
 
-
-
     def __str__(self):
         return self.TypeOfWorkout
-
 
     def get_absolute_url(self):
         return reverse('exercises_detail', kwargs={'pk': self.id})
     
-
 class Plan(models.Model):
     name = models.CharField(max_length=100)
     weight = models.IntegerField()
@@ -41,31 +34,11 @@ class Plan(models.Model):
     exercises = models.ManyToManyField(Exercise)
     meals = models.ManyToManyField(Meal)
 
-    
-
-   
-
     def __str__(self):
         return self.name
     
     def get_absolute_url(self):
         return reverse('detail', kwargs={'plan_id': self.id})
-
-
-
-
-class Comment(models.Model):
-    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=100)
-    content = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        ordering = ('-created',)
-
-    def __str__(self):
-        return 'Comment by {}'.format(self.name)
 
 class Photo(models.Model):
     url = models.CharField(max_length=200)
@@ -78,4 +51,24 @@ class Photo(models.Model):
         elif self.exercise_id:
             return f"Photo for exercise_id: {self.exercise_id} @{self.url}"
 
-    
+class Comment(models.Model):
+    email = models.EmailField()
+    name = models.CharField(max_length=50)
+    body = models.TextField()
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
+    meal = models.ForeignKey(Meal, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
+    rating = models.FloatField(default=0) 
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        if self.exercise:
+            return f'comment from {self.name} on {self.exercise}'
+        else:
+            return f'comment from {self.name} on {self.meal}'
+
+    def get_absolute_url(self):
+        if self.exercise:
+            return reverse('exercises_detail', kwargs={'pk': self.exercise.id})
+        else:
+            return reverse('meals_detail', kwargs={'pk': self.meal.id})
+

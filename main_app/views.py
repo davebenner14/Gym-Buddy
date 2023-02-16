@@ -1,8 +1,7 @@
 import uuid
 import boto3
 import os
-from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Exercise, Plan, Meal, Photo, Comment
@@ -10,15 +9,19 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import CommentForm
-from django.shortcuts import render, get_object_or_404
-from django.urls import reverse
+from django.db.models import Avg
+
+
+# from .forms import MealForm, ExerciseForm
+
+
+
 # Create your views here.
 def home(request):
   return render(request, 'home.html')
 
 def about(request):
-    return redirect('/home.html#homeabout')
+  return render(request, 'about.html')
 
 # def exercises_index(request):
 #   exercises = Exercise.objects.all()
@@ -44,10 +47,9 @@ class ExerciseList(ListView):
 
 
 class ExerciseDetail(DetailView):
-    model = Exercise
-   
+  model = Exercise
+  
 
-    
 class ExerciseUpdate(UpdateView):
   model = Exercise
   fields = '__all__'
@@ -64,15 +66,7 @@ def plans_index(request):
 
 def plans_detail(request, plan_id):
   plan = Plan.objects.get(id=plan_id)
-  id_list = plan.meals.all().values_list('id')
-  meals_plan_doesnt_have = Meal.objects.exclude(id__in=id_list)
-  id_list = plan.exercises.all().values_list('id')
-  exercises_plan_doesnt_have = Exercise.objects.exclude(id__in=id_list)
-  return render(request, 'plans/detail.html', {
-      'plan': plan,
-      'meals': meals_plan_doesnt_have,
-      'exercises': exercises_plan_doesnt_have
-    })
+  return render(request, 'plans/detail.html', { 'plan': plan })
 
 class PlanCreate(LoginRequiredMixin, CreateView):
   model = Plan
@@ -174,4 +168,43 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
+def add_comment_for_exercise(request, pk):
+    exercise = get_object_or_404(Exercise, pk=pk)
+    if request.method == 'POST':
+        name = request.POST['name']
+        body = request.POST['body']
+        rating = request.POST['rating']
+        comment = Comment(name=name, body=body, rating=rating, exercise=exercise)
+        comment.save()
+        average_rating = Comment.objects.filter(exercise=exercise).aggregate(Avg('rating'))['rating__avg']
+        exercise.average_rating = round(average_rating, 2) if average_rating is not None else None
+        exercise.save()
 
+    return redirect('exercises_detail', pk=pk)
+
+def exercises_detail(request, pk):
+    exercise = get_object_or_404(Exercise, pk=pk)
+    average_rating = Comment.objects.filter(exercise=exercise).aggregate(Avg('rating'))['rating__avg']
+    context = {'exercise': exercise, 'average_rating': average_rating}
+    return render(request, 'exercises/exercises_detail.html', context)
+
+def add_comment_for_meal(request, pk):
+    meal = get_object_or_404(Meal, pk=pk)
+    if request.method == 'POST':
+        name = request.POST['name']
+        body = request.POST['body']
+        rating = request.POST['rating']
+        comment = Comment(name=name, body=body, rating=rating, meal=meal)
+        comment.save()
+        meal.save()
+
+    return redirect('meals_detail', pk=pk)
+
+
+def meals_detail(request, pk):
+    meal = get_object_or_404(Meal, pk=pk)
+    average_rating = Comment.objects.filter(meal=meal).aggregate(Avg('rating'))
+    print('average_rating: ' + str(average_rating))  
+    print("test")
+    context = {'meal': meal, 'average_rating': average_rating}
+    return render(request, 'meals/meal_detail.html', context)
