@@ -46,36 +46,7 @@ class ExerciseDetail(DetailView):
     model = Exercise
    
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        pk = self.kwargs["pk"]
-        exercise = get_object_or_404(Exercise, pk=pk)
-        comments = exercise.comment_set.all()
-        form = CommentForm()
-        context['exercise'] = exercise
-        context['comments'] = comments
-        context['form'] = form
-        return context
-
-    def post(self, request, *args, **kwargs):
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            content = form.cleaned_data['content']
-            exercise = get_object_or_404(Exercise, pk=kwargs['pk'])
-            comment = Comment.objects.create(
-                name=name, email=email, content=content, exercise=exercise
-            )
-            return redirect('exercises_detail', pk=exercise.pk)
-
-        
-        context = self.get_context_data(**kwargs)
-        context['form'] = form
-        return self.render_to_response(context)
-
-
-
+    
 class ExerciseUpdate(UpdateView):
   model = Exercise
   fields = '__all__'
