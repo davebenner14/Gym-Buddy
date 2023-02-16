@@ -18,10 +18,10 @@ footer.page-footer {
   font-family: Oswald;
   font-size: 40px;
   font-weight: bold;
-  text-transform: uppercase;  
+  text-transform: uppercase;
 }
 
-.right{
+.right {
   font-family: Poppins;
   font-size: 16px;
   margin-right: 200px;
@@ -69,6 +69,91 @@ nav ul ul li a:hover {
   background-color: #333;
 }
 
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 400px;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.card-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.card-image2 {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+.card-title {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.card-title2 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.card-title3 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.card-text {
+  font-size: 1.2rem;
+  margin-top: 5px;
+  margin-bottom: 25px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: black;
+}
+
+.card-text2 {
+  font-size: 1.2rem;
+  margin-top: 5px;
+  margin-bottom: 25px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: black;
+}
+
+.card-text3 {
+  font-size: 1.2rem;
+  margin-top: 5px;
+  margin-bottom: 25px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
 .home-page {
   display: flex;
   flex-direction: column;

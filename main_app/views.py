@@ -5,12 +5,14 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Exercise, Plan, Meal, Photo
+from .models import Exercise, Plan, Meal, Photo, Comment
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from .forms import CommentForm
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 # Create your views here.
 def home(request):
   return render(request, 'home.html')
@@ -42,8 +44,10 @@ class ExerciseList(ListView):
 
 
 class ExerciseDetail(DetailView):
-  model = Exercise
+    model = Exercise
+   
 
+    
 class ExerciseUpdate(UpdateView):
   model = Exercise
   fields = '__all__'
@@ -169,3 +173,5 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
+
+
