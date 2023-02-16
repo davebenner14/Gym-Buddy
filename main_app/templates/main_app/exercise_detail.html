@@ -53,9 +53,9 @@
     <span class="card-title">{{exercise.TypeOfWorkout}}</span>
     <p>Duration: {{exercise.duration}}</p>
     <p>Description: {{exercise.description}}</p>
-    <!-- <p>Average Rating: {% if average_rating %}{{ average_rating|floatformat }}{% else %}No ratings yet.{% endif %}</p> -->
-    <p>Average Rating: {% if average_rating %}{{ average_rating|floatformat:2 }}{% else %}No ratings yet.{% endif %}</p>
-
+    {% if average_rating %}
+    <p>Average Rating: {{ average_rating }}</p>
+    {% endif %}
   </div>
 </div>
 

@@ -10,6 +10,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Avg
+from .models import Meal, Comment, Exercise
+
 
 
 # from .forms import MealForm, ExerciseForm
@@ -48,7 +50,15 @@ class ExerciseList(ListView):
 
 class ExerciseDetail(DetailView):
   model = Exercise
-  
+  template_name = 'main_app/exercise_detail.html'
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    exercise = context['object']
+    average_rating = Comment.objects.filter(exercise=exercise).aggregate(Avg('rating'))['rating__avg']
+    context['average_rating'] = average_rating
+    return context
+
 
 class ExerciseUpdate(UpdateView):
   model = Exercise
@@ -108,6 +118,15 @@ class MealCreate(CreateView):
 
 class MealDetail(DetailView):
   model = Meal
+  template_name = 'main_app/meal_detail.html'
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    meal = context['object']
+    average_rating = Comment.objects.filter(meal=meal).aggregate(Avg('rating'))['rating__avg']
+    context['average_rating'] = average_rating
+    return context
+
 
 class MealUpdate(UpdateView):
   model = Meal
