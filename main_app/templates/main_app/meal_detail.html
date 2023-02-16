@@ -4,14 +4,16 @@
 
 <div class="row">
   <div class="col s6 col-offset-3">
-    <div class="card">
+    <div class="card2">
       <div class="card-content">
         <span class="card-title">{{ meal.name }}</span>
         <p>Description: {{ meal.description }}</p>
         <p>Price: {{ meal.price }}</p>
-        <p>Date Created: {{ meal.created_at }}</p>
+        <div class="card-action">
+          <a href="{% url 'meals_update' meal.id %}">Edit</a>
+          <a href="{% url 'meals_delete' meal.id %}">Delete</a>
+        </div>
       </div>
-      <!-- Insert photo markup below this comment -->
       {% for photo in meal.photo_set.all %}
       <img
         class="responsive-img card-panel"
@@ -34,27 +36,15 @@
         <button type="submit" class="btn">Upload Photo</button>
       </form>
 
-      <h1>Rate {{ meal.name }}</h1>
-      <form method="post">
-        {% csrf_token %} {{ form.as_p }}
-        <button type="submit">Submit</button>
-      </form>
-
-      <div class="card-action">
-        <a href="{% url 'meals_update' meal.id %}">Edit</a>
-        <a href="{% url 'meals_delete' meal.id %}">Delete</a>
-      </div>
+      <h3>Rate {{ meal.name }}</h3>
+      <form method="post">{% csrf_token %} {{ form.as_p }}</form>
     </div>
   </div>
 </div>
 
-<div class="card">
+<div class="card6">
   <div class="card-content">
     <span class="card-title">{{meal.name}}</span>
-    <p>Calories: {{meal.calories}}</p>
-    <p>Protein: {{meal.protein}}</p>
-    <p>Carbs: {{meal.carbs}}</p>
-    <p>Fat: {{meal.fat}}</p>
     {% if average_rating %}
     <p>Average Rating: {{ average_rating }}</p>
     {% endif %}

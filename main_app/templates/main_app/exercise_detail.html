@@ -10,6 +10,10 @@
         <p>Duration: {{exercise.duration}}</p>
         <p>Description: {{exercise.description}}</p>
       </div>
+      <div class="card-action">
+        <a href="{% url 'exercises_update' exercise.id %}">Edit</a>
+        <a href="{% url 'exercises_delete' exercise.id %}">Delete</a>
+      </div>
     </div>
     
     
@@ -37,10 +41,6 @@
         <input type="file" name="photo-file" />
         <br /><br />
         <button type="submit" class="btn">Upload Photo</button>
-        <div class="card-action">
-          <a href="{% url 'exercises_update' exercise.id %}">Edit</a>
-          <a href="{% url 'exercises_delete' exercise.id %}">Delete</a>
-        </div>
       </form>
 
       </form>
