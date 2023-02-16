@@ -2,6 +2,7 @@ import uuid
 import boto3
 import os
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Exercise, Plan, Meal, Photo
@@ -15,7 +16,7 @@ def home(request):
   return render(request, 'home.html')
 
 def about(request):
-  return render(request, 'about.html')
+    return redirect('/home.html#homeabout')
 
 # def exercises_index(request):
 #   exercises = Exercise.objects.all()
