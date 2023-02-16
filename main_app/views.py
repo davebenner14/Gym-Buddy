@@ -76,7 +76,15 @@ def plans_index(request):
 
 def plans_detail(request, plan_id):
   plan = Plan.objects.get(id=plan_id)
-  return render(request, 'plans/detail.html', { 'plan': plan })
+  id_list = plan.meals.all().values_list('id')
+  meals_plan_doesnt_have = Meal.objects.exclude(id__in=id_list)
+  id_list = plan.exercises.all().values_list('id')
+  exercises_plan_doesnt_have = Exercise.objects.exclude(id__in=id_list)
+  return render(request, 'plans/detail.html', {
+      'plan': plan,
+      'meals': meals_plan_doesnt_have,
+      'exercises': exercises_plan_doesnt_have
+    })
 
 class PlanCreate(LoginRequiredMixin, CreateView):
   model = Plan
