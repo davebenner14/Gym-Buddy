@@ -2,9 +2,9 @@
 
 <h1>Health Plan</h1>
 
-<div class="row">
+
   <div class="col s6">
-    <div class="card3">
+    <div class="card9">
       <div class="card-content">
         <span class="card-title">{{ plan.name }}</span>
         {% if plan.weight > 0 %}
@@ -15,11 +15,15 @@
         <p>Plan Goal: {{ plan.goal }}</p>
       </div>
       <div class="card-action">
-        <a href="{% url 'plans_update' plan.id %}">Edit</a>
-        <a href="{% url 'plans_delete' plan.id %}">Delete</a>
+        <button class="btn">
+          <a href="{% url 'plans_update' plan.id %}">Edit</a>
+        </button>
+        <button class="btn">
+          <a href="{% url 'plans_delete' plan.id %}">Delete</a>
+        </button>
       </div>
     </div>
-  </div>
+
   <hr />
 
   <div class="row">
@@ -57,10 +61,16 @@
       {% endif %}
     </div>
   </div>
+</a>
+
+<hr />
+
+
   <div class="col s6">
     <h3>Available Meals</h3>
     {% if meals.count %} {% for meal in meals.all %}
-
+    <div class="card">
+      <div class="card-content">
     <a href="{% url 'meals_detail' meal.id %}">
       <div class="card-content">
         {% for photo in meal.photo_set.all %}
@@ -72,12 +82,12 @@
         {% empty %}
         <div class="card-panel teal-text center-align">No Photos Uploaded</div>
         {% endfor %}
-        <span class="card-title">
-          <p>Meal: {{ meal.name }}</p>
-          <span>${{ meal.price }}</span>
-        
+        <span class="card-title">Meal: {{ meal.name }}</span>
+          <p>${{ meal.price }}</p>
+        </div>
+
+      </a>
       </div>
-    </a>
 
       <div class="card-action">
         <form action="{% url 'assoc_meal' plan.id meal.id %}" method="POST">
@@ -90,9 +100,9 @@
     <h5>{{plan.name}} Already Has All Meals Available</h5>
     {% endif %}
   </div>
+</div>
+</div>
   <hr />
-
-
 
   <div class="row">
     <div class="col s6">
@@ -115,8 +125,10 @@
               <p class="card-text 3">Duration: {{exercise.duration}}</p>
               <p class="card-text 3">Description: {{exercise.description}}</p>
             </div>
-          </a>
+
         </div>
+
+
         <div class="card-action">
           <form
             action="{% url 'unassoc_exercise' plan.id exercise.id %}"
@@ -131,13 +143,17 @@
       <h5>No Exercises</h5>
       {% endif %}
     </div>
+  </div>
+  </a>
+  
+  <hr />
+
+
     <div class="col s6">
       <h3>Available Exercises</h3>
       {% if exercises.count %} {% for exercise in exercises.all %}
-      <div class="card-container">
-
-
-
+      <div class="card">
+        <div class="card-container">
           <a href="{% url 'exercises_detail' exercise.id %}">
             <div class="card-content">
               {% for photo in exercise.photo_set.all %}

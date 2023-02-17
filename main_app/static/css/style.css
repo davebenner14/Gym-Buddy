@@ -81,7 +81,7 @@ nav ul ul li a:hover {
   align-items: center;
   justify-content: center;
   width: 300px;
-  height: 400px;
+  height: 450px;
 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
@@ -202,12 +202,22 @@ nav ul ul li a:hover {
 .btn {
   background-color: black;
   border-radius: 10px;
+  color: white;
+}
+
+.btn a {
+  color: white;
 }
 
 .btn:hover {
   background-color: white;
   color: black;
 }
+
+.btn:hover a{
+  color: black;
+}
+
 
 .rating-dropdown {
   padding: 10px;
