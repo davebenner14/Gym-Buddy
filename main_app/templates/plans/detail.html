@@ -27,8 +27,8 @@
   <hr />
 
   <div class="row">
+    <h3>{{ plan.name }}'s Meal</h3>
     <div class="col s6">
-      <h3>{{ plan.name }}'s Meal</h3>
       {% if plan.meals.count %} {% for meal in plan.meals.all %}
       <div class="card">
         <div class="card-content">
@@ -65,7 +65,7 @@
 
 <hr />
 
-
+<div class="row">
   <div class="col s6">
     <h3>Available Meals</h3>
     {% if meals.count %} {% for meal in meals.all %}
@@ -101,12 +101,12 @@
     {% endif %}
   </div>
 </div>
-</div>
+
   <hr />
 
   <div class="row">
+    <h3>{{ plan.name }}'s Exercises</h3>
     <div class="col s6">
-      <h3>{{ plan.name }}'s Exercises</h3>
       {% if plan.exercises.count %} {% for exercise in plan.exercises.all %}
       <div class="card">
         <div class="card-content">
