@@ -40,6 +40,7 @@ Add link to app here
 - [Mohamed Abdulle](https://github.com/m7amed95)
 
 <h2 align="center">Next Steps</h2>
+
 - Adding a profile page where we can update our current health status and add health plans or challenges to our profile.
 
 - A chat feature where we can discuss with other about our fitness
