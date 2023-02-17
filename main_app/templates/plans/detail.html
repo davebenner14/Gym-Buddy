@@ -29,7 +29,7 @@
       <div class="card">
         <div class="card-content">
 
-          <a href="{% url 'meals_detail' meal.id %}" class="card">
+          <a href="{% url 'meals_detail' meal.id %}">
           {% for photo in meal.photo_set.all %}
           <img
             class="responsive-img card-panel"
@@ -61,7 +61,7 @@
     <h3>Available Meals</h3>
     {% if meals.count %} {% for meal in meals.all %}
 
-    <a href="{% url 'meals_detail' meal.id %}" class="card">
+    <a href="{% url 'meals_detail' meal.id %}">
       <div class="card-content">
         {% for photo in meal.photo_set.all %}
         <img
@@ -138,7 +138,7 @@
 
 
 
-          <a href="{% url 'exercises_detail' exercise.id %}" class="card">
+          <a href="{% url 'exercises_detail' exercise.id %}">
             <div class="card-content">
               {% for photo in exercise.photo_set.all %}
               <img

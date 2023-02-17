@@ -36,7 +36,7 @@
         <button type="submit" class="btn">Upload Photo</button>
       </form>
 
-      <h3>Rate {{ meal.name }}</h3>
+
       <form method="post">{% csrf_token %} {{ form.as_p }}</form>
     </div>
   </div>
@@ -44,9 +44,9 @@
 
 <div class="card6">
   <div class="card-content">
-    <span class="card-title">{{meal.name}}</span>
+    
     {% if average_rating %}
-    <p>Average Rating: {{ average_rating }}</p>
+    <p class="avgrating">Average Rating: {{ average_rating }}</p>
     {% endif %}
   </div>
 </div>

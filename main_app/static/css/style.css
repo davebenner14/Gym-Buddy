@@ -248,4 +248,7 @@ nav ul ul li a:hover {
   background-color: #555;
 }
 
-
+.avgrating {
+  font-size: 30px;
+  color: red;
+}
