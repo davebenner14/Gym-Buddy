@@ -31,13 +31,22 @@ Gym Buddy is a social app designed to help people stay on track with their fitne
 <h2 align="center">Getting Started</h2>
 Add link to app here
 
-<h2 align="center">Team</h2>
+<h2 align="center">Development Team</h2>
 
 - [David Benner](https://github.com/davebenner14)
 
 - [Ken Lo](https://github.com/kenlo112)
 
 - [Mohamed Abdulle](https://github.com/m7amed95)
+
+<h2 align="center">Design Team</h2>
+
+- Christopher Blanchford
+
+- Jimin Lee
+
+- Vishnu Banerji
+
 
 <h2 align="center">Next Steps</h2>
 
