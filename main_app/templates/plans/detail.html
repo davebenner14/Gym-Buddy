@@ -100,8 +100,8 @@
       {% if plan.exercises.count %} {% for exercise in plan.exercises.all %}
       <div class="card">
         <div class="card-content">
-          <a href="{% url 'exercises_detail' exercise.id %}" class="card">
-\              {% for photo in exercise.photo_set.all %}
+          <a href="{% url 'exercises_detail' exercise.id %}" >
+              {% for photo in exercise.photo_set.all %}
               <img
                 class="responsive-img card-panel"
                 src="{{photo.url}}"
