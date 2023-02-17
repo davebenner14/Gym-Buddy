@@ -41,9 +41,13 @@ Add link to app here
 
 <h2 align="center">Next Steps</h2>
 - Adding a profile page where we can update our current health status and add health plans or challenges to our profile.
+
 - A chat feature where we can discuss with other about our fitness
+
 - A centralized discussion forum
+
 - Pushing top ranked meals or exercises to the front of the display lists.
+
 - A date feature where we can keep track of current challenges or being able to schedule exercises or meals.
 <h2 align="center">Planning</h2>
 Add Trello board and planning assets here
