@@ -50,7 +50,8 @@ Add link to app here
 
 <h2 align="center">Next Steps</h2>
 
-- Adding a profile page where we can update our current health status and add health plans or challenges to our profile.
+
+- Adding a profile page where we can update our current health status and add health plans or challenges to our profile. A "coach" or "trainer" option to this would be good too.
 
 - A chat feature where we can discuss with other about our fitness
 
