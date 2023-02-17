@@ -10,9 +10,13 @@
         <p>Duration: {{exercise.duration}}</p>
         <p>Description: {{exercise.description}}</p>
       </div>
+      <button class="btn">
       <div class="card-action">
         <a href="{% url 'exercises_update' exercise.id %}">Edit</a>
+      </button>
+        <button class="btn">
         <a href="{% url 'exercises_delete' exercise.id %}">Delete</a>
+      </button>
       </div>
     </div>
     
