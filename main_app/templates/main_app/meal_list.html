@@ -11,7 +11,7 @@
   }
 </style>
 
-<h1>Exercise List</h1>
+<h1>Meal Plans</h1>
 
 <div class="card-container">
   {% for meal in meal_list %}
@@ -30,31 +30,10 @@
       <span class="card-title2">{{ meal.name }}</span>
       <p class="card-text 2">Description: {{ meal.description }}</p>
       <p class="card-text 2">Price: {{ meal.price }}</p>
-      <p class="card-text 2">Date Created: {{ meal.created_at }}</p>
     </div>
   </a>
 
   {% endfor %}
 </div>
-
-<!-- <h1>Meal List</h1>
-<div class="card-container">
-  {% for meal in meal_list %}
-
-  <a href="{% url 'meals_detail' meal.id %}" class="card">
-    <img
-      src="https://imgur.com/fC9EqeC.png"
-      alt="{{ meal.name}}"
-      class="card-image2"
-    />
-    <div class="card-content">
-      <span class="card-title2">{{ meal.name }}</span>
-      <p class="card-text 2">Description: {{ meal.description }}</p>
-      <p class="card-text 2">Price: {{ meal.price }}</p>
-      <p class="card-text 2">Date Created: {{ meal.created_at }}</p>
-    </div>
-  </a>
-  {% endfor %}
-</div> -->
 
 {% endblock %}
