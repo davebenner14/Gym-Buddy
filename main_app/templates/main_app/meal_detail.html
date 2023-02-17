@@ -10,8 +10,12 @@
         <p>Description: {{ meal.description }}</p>
         <p>Price: {{ meal.price }}</p>
         <div class="card-action">
+          <button class="btn">
           <a href="{% url 'meals_update' meal.id %}">Edit</a>
+        </button>
+          <button class="btn">
           <a href="{% url 'meals_delete' meal.id %}">Delete</a>
+        </button>
         </div>
       </div>
       {% for photo in meal.photo_set.all %}
